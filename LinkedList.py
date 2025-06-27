@@ -91,6 +91,15 @@ class LinkedList:
             temp = temp.next
         return count
 
+    def get_value(self,index):
+        if index < 0 or index >= self.get_length():
+            raise Exception("Invalid Index")
+
+        curr = self.head
+        for _ in range(index):
+            curr=curr.next
+        return curr.data if curr else -1
+
     def remove_first(self):
         if self.head is None:
             return
@@ -161,6 +170,8 @@ if __name__ == '__main__':
     ll.print()
 
     print(ll.get_length())
+    print(ll.get_value(2))
+
 
     ll.remove_first()
     ll.print()
