@@ -28,7 +28,8 @@ class TreeNode:
 
     def print_value(self):
         print(self.data)
-        print(self.children[2].children[1].data)
+        print(self.children[1].children[0].data)
+
 
 def build_product_tree():
     root = TreeNode("RV Groups")
@@ -50,9 +51,10 @@ def build_product_tree():
     root.add_child(electonics)
     root.add_child(moto)
 
+
     return root
 
 if __name__ == "__main__":
     root = build_product_tree()
     root.print_tree()
-    # root.print_value()
+    root.print_value()

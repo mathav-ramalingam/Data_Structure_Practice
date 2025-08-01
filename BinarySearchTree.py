@@ -96,6 +96,37 @@ class BinarySearchTree:
         return element
 
 
+    def delete(self,val):
+        if val < self.data:
+            if self.left:
+                self.left = self.left.delete(val)
+            else:
+                return None
+        elif val > self.data:
+            if self.right:
+                self.right = self.right.delete(val)
+            else:
+                return None
+        else:
+            if self.left is None and self.right is None:
+                return None
+            elif self.left is None:
+                return self.right
+            elif self.right is None:
+                return self.left
+
+            # approach 1
+            min_ele = self.right.min_val()
+            self.data = min_ele
+            self.right = self.right.delete(min_ele)
+
+            # approach 2
+            # max_ele = self.left.max_val()
+            # self.data = max_ele
+            # self.left = self.left.delete(max_ele)
+
+        return self
+
 def build_tree(num):
     root = BinarySearchTree(num[0])
 
@@ -105,8 +136,8 @@ def build_tree(num):
     return root
 
 if __name__ == "__main__":
-    # num = [4,17,52,64,81,2,16,32,28,1,9,16]
-    num = [9,10,7,8,3]
+    num = [4,17,52,64,81,2,16,32,28,1,9,16]
+    # num = [9,10,7,8,3]
     tree = build_tree(num)
     print(f"value 11 is in the tree: {tree.search(11)}")
     print(f"Max Value in the tree: {tree.max_val()}")
@@ -115,3 +146,7 @@ if __name__ == "__main__":
     print(f"Inorder : {tree.inOrderTraversal()}")
     print(f"PreOder: {tree.preOrder()}")
     print(f"PostOrder: {tree.postOrder()}")
+
+    print(f"before deleting the value: {tree.inOrderTraversal()}")
+    tree.delete(2)
+    print(f"After deleting the value: {tree.inOrderTraversal()}")
